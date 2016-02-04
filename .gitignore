@@ -58,5 +58,14 @@ docs/_build/
 # PyBuilder
 target/
 
-#Ipython Notebook
+# Ipython Notebook
 .ipynb_checkpoints
+
+# Ignore secrets
+secrets.py
+
+# Ignore database files
+*.sqlite3
+*.dump
+*.sql
+*.db
