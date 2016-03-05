@@ -86,12 +86,28 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
-DATABASES = {
-	'default': {
-		'ENGINE': 'django.db.backends.sqlite3',
-		'NAME': os.path.join(BASE_DIR, 'data/'+DATABASE_NAME+'.sqlite3'),
+if ENVIRONMENT == 'development':
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': DATABASE_NAME,
+			'USER': 'django',
+			'PASSWORD': 'django',
+			'HOST': '127.0.0.1',
+			'PORT': '5432',
+		}
 	}
-}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.postgresql_psycopg2',
+			'NAME': DATABASE_NAME,
+			'USER': 'django',
+			'PASSWORD': os.environ.get('DB_PASSWORD'),
+			'HOST': '127.0.0.1',
+			'PORT': '5432',
+		}
+	}
 
 
 # Internationalization
