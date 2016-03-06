@@ -6,7 +6,10 @@
 <body>
 	Log:
 	{% for entry in entries %}
-	{{log}}
+	<br>
+	{{entry.server_ip}}
+	{{entry.server_name}}
+	{{entry.message}}
 	{% endfor %}
 </body>
 </html>

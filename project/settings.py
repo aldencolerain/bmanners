@@ -32,6 +32,7 @@ else:
 
 # Security
 ALLOWED_HOSTS = ["*"]
+API_SECRET = os.environ['API_SECRET']
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
