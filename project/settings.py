@@ -110,6 +110,34 @@ else:
 		}
 	}
 
+# Logging
+if ENVIRONMENT == 'production':
+	LOGGING = {
+		'version': 1,
+		'disable_existing_loggers': False,
+		'handlers': {
+			'console': {
+				'level': 'INFO',
+				'class': 'logging.StreamHandler'
+			},
+		},
+		'loggers': {
+			'django': {
+				'handlers': ['console'],
+				'level': 'INFO',
+				'propagate': True,
+			},
+			'django.request': {
+				'handlers': ['console'],
+				'level': 'ERROR',
+				'propagate': False,
+			},
+		},
+		'root': {
+			'handlers': ['console'],
+			'level': 'INFO'
+		}
+	}
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
