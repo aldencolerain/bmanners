@@ -1,0 +1,29 @@
+from django.shortcuts import render, redirect
+from project.models import Reservation
+from django.http import JsonResponse
+from django.conf import settings
+import logging
+logger = logging.getLogger(__name__)
+
+
+def index(request):
+	return render(request, 'index.html', {})
+
+def reserve(request):
+	context = {}
+	context['reservation'] = Reservation.current()
+	return render(request, 'reserve.html', context)
+
+def reserve_post(request):
+	if not Reservation.current():
+		Reservation(profile=request.user.profile).save()
+	return redirect('reserve')
+
+def password(request):
+	if request.POST.get('secret') != settings.API_SECRET:
+		return JsonResponse({'error':'Unauthorized'}, status=401)
+	reservation = Reservation.current()
+	if reservation:
+		return JsonResponse({'password':reservation.password})
+	else:
+		return JsonResponse({'password':'keepoutpls'})

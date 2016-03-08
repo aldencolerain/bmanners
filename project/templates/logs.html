@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
+{% extends "layout.html" %}
+
+{% block content %}
 	Log:
 	{% for entry in entries %}
 	<br>
@@ -11,5 +8,4 @@
 	{{entry.server_name}}
 	{{entry.message}}
 	{% endfor %}
-</body>
-</html>
+{% endblock %}

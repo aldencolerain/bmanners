@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
+	{% if reservation %}
+		{% if request.user.profile == reservation.profile %}
+		<h2>Your have the server reserved until {{reservation.expiration|naturaltime}}. The password is: {{reservation.password}}</h2>
+		{% else %}
+		<h2>The server is reserved by: {{reservation.profile.user.username}}</h2>
+		{% endif %}
+	{% else %}
+		<h2><form action="{% url 'reserve' %}" method="POST">{% csrf_token %}<button type="submit">Reserve Server Now!</button></form></h2>
+	{% endif %}
+{% endblock %}

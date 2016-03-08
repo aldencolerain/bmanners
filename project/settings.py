@@ -19,6 +19,7 @@ if ENVIRONMENT == 'development':
 	DEBUG = True
 	TEMPLATE_DEBUG = True
 	DATABASE_NAME = 'development'
+	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Production
@@ -26,8 +27,8 @@ else:
 	DEBUG = False
 	TEMPLATE_DEBUG = False
 	DATABASE_NAME = 'production'
-	SESSION_COOKIE_SECURE = True
-	CSRF_COOKIE_SECURE = True
+	SESSION_COOKIE_SECURE = False
+	CSRF_COOKIE_SECURE = False
 
 
 # Security
@@ -45,6 +46,7 @@ INSTALLED_APPS = (
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'django.contrib.humanize',
 	'project'
 )
 
@@ -63,6 +65,9 @@ MIDDLEWARE_CLASSES = (
 
 # URLs
 ROOT_URLCONF = 'project.urls'
+APPEND_SLASH = False
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/signin'
 
 
 # Templates

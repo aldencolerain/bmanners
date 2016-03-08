@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-Hello from BoringManClan!
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block content %}
+	<h1>Boring Man Clan</h1>
+	<h2><a href="{% url 'reserve' %}">Reserve Server</a></h2>
+{% endblock %}
