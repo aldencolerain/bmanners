@@ -12,6 +12,7 @@ from views import profiles
 urlpatterns = [
 	url(r'^$', rest(get=home.index), name='index'),
 	url(r'^reserve$', login_required(rest(get=home.reserve, post=home.reserve_post)), name='reserve'),
+	url(r'^reserve/delete$', home.delete_reservation, name='delete_reservation'),
 	url(r'^password$', csrf_exempt(rest(post=home.password)), name='password'),
 
 	url(r'^signin$', auth.signin, name='signin'),

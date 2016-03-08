@@ -19,6 +19,12 @@ def reserve_post(request):
 		Reservation(profile=request.user.profile).save()
 	return redirect('reserve')
 
+def delete_reservation(request):
+	current_reservation = Reservation.current()
+	if current_reservation and current_reservation.profile == request.user.profile:
+		current_reservation.delete()
+	return redirect('reserve')
+
 def password(request):
 	if request.POST.get('secret') != settings.API_SECRET:
 		return JsonResponse({'error':'Unauthorized'}, status=401)
