@@ -23,7 +23,7 @@ urlpatterns = [
 	url(r'^signup$', rest(get=profiles.create, post=profiles.create_post), name='signup'),
 	url(r'^profile$', login_required(rest(get=profiles.edit, post=profiles.edit_post)), name='profile'),
 
-	url(r'^logs$', rest(get=login_required(logs.logs), post=logs.logs_create), name='logs'),
+	url(r'^logs$', csrf_exempt(rest(get=login_required(logs.logs), post=logs.logs_create)), name='logs'),
 
 	url(r'^admin/', include(admin.site.urls)),
 ]
