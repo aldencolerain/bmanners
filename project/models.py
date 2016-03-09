@@ -20,7 +20,7 @@ class Entry(models.Model):
 	message = models.CharField(max_length=10000)
 
 def a_time_in_the_future():
-	return tz.now() + timedelta(minutes=15)
+	return tz.now() + timedelta(minutes=20)
 
 def random_password():
 	return "".join([random.choice(string.digits + string.letters) for i in range(4)]).lower()
