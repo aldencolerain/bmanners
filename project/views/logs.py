@@ -19,5 +19,5 @@ def logs_create(request):
 @user_passes_test(lambda u: u.is_superuser)
 def logs(request):
 	context = {}
-	context['entries'] = Entry.objects.all()
+	context['entries'] = Entry.objects.order_by("-id").all()[:100]
 	return render(request, 'logs.html', context)
