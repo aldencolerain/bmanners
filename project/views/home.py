@@ -16,7 +16,8 @@ def reserve(request):
 
 def reserve_post(request):
 	if not Reservation.current():
-		Reservation(profile=request.user.profile).save()
+		map = request.POST.get('map', 'city').lower()
+		Reservation(profile=request.user.profile, map=map).save()
 	return redirect('reserve')
 
 def delete_reservation(request):
@@ -30,6 +31,6 @@ def password(request):
 		return JsonResponse({'error':'Unauthorized'}, status=401)
 	reservation = Reservation.current()
 	if reservation:
-		return JsonResponse({'password':reservation.password})
+		return JsonResponse({'password':reservation.password, 'map': reservation.map})
 	else:
-		return JsonResponse({'password':'keepoutpls'})
+		return JsonResponse({'password':'keepoutpls', 'map':'city'})

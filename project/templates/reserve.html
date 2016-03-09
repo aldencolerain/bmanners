@@ -11,6 +11,30 @@
 		<h2>The server is reserved by: {{reservation.profile.user.username}}</h2>
 		{% endif %}
 	{% else %}
-		<form action="{% url 'reserve' %}" method="POST">{% csrf_token %}<button type="submit">Reserve Server Now!</button></form>
+		<p>
+		<form action="{% url 'reserve' %}" method="POST">{% csrf_token %}
+			<select name="map">
+				<option value="city" selected="selected">Arctic</option>
+				<option value="arena">Arena</option>
+				<option value="city" selected="selected">City</option>
+				<option value="desertcity">Desert City</option>
+				<option value="factory">Factory</option>
+				<option value="fields">Fields</option>
+				<option value="fields2">Fields2</option>
+				<option value="lake">Lake</option>
+				<option value="mines">Mines</option>
+				<option value="rooftops">Rooftops</option>
+				<option value="sand">Sand</option>
+				<option value="sewers">Sewers</option>
+				<option value="snow">Snow</option>
+				<option value="throne">Throne</option>
+				<option value="warehouse">Warehouse</option>
+				<option value="warer">Water</option>
+			</select>
+			<br>
+			<br>
+			<button type="submit">Reserve Server Now!</button>
+		</form>
+		</p>
 	{% endif %}
 {% endblock %}

@@ -30,6 +30,7 @@ class Reservation(models.Model):
 	time = models.DateTimeField(default=tz.now)
 	expiration = models.DateTimeField(default=a_time_in_the_future)
 	password = models.CharField(max_length=100, default=random_password)
+	map = models.CharField(max_length=100)
 	
 	@staticmethod
 	def current():
