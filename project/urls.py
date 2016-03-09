@@ -34,7 +34,7 @@ urlpatterns = [
 	rest_url(r'^logs$', 'GET', logs.index, name='logs.index'),
 
 	# api
-	rest_url(r'^api/reservation$', 'GET', reservations.api_show, name='reservations.api_show'),
+	rest_url(r'^api/reservation$', 'POST', reservations.api_show, name='reservations.api_show'),
 	rest_url(r'^api/logs$', 'POST', logs.api_create, name='logs.api_create'),
 
 	# admin
