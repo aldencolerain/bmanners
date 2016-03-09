@@ -6,13 +6,17 @@
 		{% if request.user.profile == reservation.profile %}
 		<h2>Your have the server reserved until {{reservation.expiration|naturaltime}}. The password is: {{reservation.password}}</h2>
 		<p>Are you getting a "TCP Error 5" message when you try to join? Try deleting your reservation and trying again.</p>
-		<p><a href="{% url 'delete_reservation' %}">Delete my reservation!</a></p>
+		<form action="{% url 'reservations.delete' %}" method="POST">
+			{% csrf_token %}
+			{% method 'DELETE' %}
+			<button type="submit" href="{% url 'reservations.delete' %}">Delete my reservation!</button>
+		</form>
 		{% else %}
 		<h2>The server is reserved by: {{reservation.profile.user.username}}</h2>
 		{% endif %}
 	{% else %}
 		<p>
-		<form action="{% url 'reserve' %}" method="POST">{% csrf_token %}
+		<form action="{% url 'reservations.create' %}" method="POST">{% csrf_token %}
 			<select name="map">
 				<option value="city" selected="selected">Arctic</option>
 				<option value="arena">Arena</option>

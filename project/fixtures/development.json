@@ -1,0 +1,4 @@
+[
+{"model": "auth.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$24000$8Cu0h3pn4qpK$kFtBhAiCOjxq7hDj00gztlIOK2rgwXzImXmAKNeETI4=", "last_login": null, "is_superuser": true, "username": "root", "first_name": "", "last_name": "", "email": "root@root.com", "is_staff": true, "is_active": true, "date_joined": "2016-03-09T05:46:07.754Z", "groups": [], "user_permissions": []}},
+{"model": "project.profile", "pk": 1, "fields": {"user": 1}}
+]

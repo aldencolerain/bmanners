@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 
 # install requirements
 RUN pip install \
-	Django==1.8 \
+	Django==1.9 \
 	psycopg2==2.6.1
 
 # run container

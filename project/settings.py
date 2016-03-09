@@ -17,7 +17,6 @@ ENVIRONMENT = os.environ.get('ENVIRONMENT', 'production').lower()
 # Development
 if ENVIRONMENT == 'development':
 	DEBUG = True
-	TEMPLATE_DEBUG = True
 	DATABASE_NAME = 'development'
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -25,7 +24,6 @@ if ENVIRONMENT == 'development':
 # Production
 else:
 	DEBUG = False
-	TEMPLATE_DEBUG = False
 	DATABASE_NAME = 'production'
 	SESSION_COOKIE_SECURE = False
 	CSRF_COOKIE_SECURE = False
@@ -60,6 +58,7 @@ MIDDLEWARE_CLASSES = (
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 	'django.middleware.security.SecurityMiddleware',
+	'project.extensions.rest.RestMiddleware',
 )
 
 
@@ -83,6 +82,7 @@ TEMPLATES = [
 				'django.contrib.auth.context_processors.auth',
 				'django.contrib.messages.context_processors.messages',
 			],
+			'builtins': ['project.extensions.rest']
 		},
 	},
 ]

@@ -1,5 +1,6 @@
-from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from project.extensions.shortcuts import sensitive
@@ -9,12 +10,12 @@ logger = logging.getLogger(__name__)
 
 
 @sensitive
-def create(request):
+def new(request):
 	form = CreateProfileForm()
-	return render(request, 'profiles/create.html', {'form': form})
+	return render(request, 'profiles/new.html', {'form': form})
 
 @sensitive
-def create_post(request):
+def create(request):
 	form = CreateProfileForm(request.POST)
 	if form.is_valid():
 		username = form.cleaned_data['username']
@@ -24,19 +25,21 @@ def create_post(request):
 		user.save()
 		user = authenticate(username=username, password=password)
 		login(request, user)
-		return redirect('index')
-	return render(request, 'profiles/create.html', {'form': form})
+		return redirect('home.index')
+	return render(request, 'profiles/new.html', {'form': form})
 
 @sensitive
+@login_required
 def edit(request):
 	form = EditProfileForm(request.user)
 	return render(request, 'profiles/edit.html', {'form': form})
 
 @sensitive
-def edit_post(request):
+@login_required
+def update(request):
 	form = EditProfileForm(request.user, data=request.POST)
 	if form.is_valid():
 		form.save()
 		update_session_auth_hash(request, form.user)
-		return redirect('profile')
+		return redirect('profiles.edit')
 	return render(request, 'profiles/edit.html', {'form': form})
