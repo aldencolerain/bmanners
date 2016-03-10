@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 @user_passes_test(lambda u: u.is_superuser)
 def index(request):
 	context = {}
-	context['entries'] = Entry.objects.order_by("-id").all()[:100]
+	context['entries'] = Entry.objects.order_by("-id").all()[:1000]
 	return render(request, 'logs/index.html', context)
 
 @csrf_exempt
