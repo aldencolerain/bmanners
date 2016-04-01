@@ -9,14 +9,14 @@ done < requirements.txt
 sed -i -e '/RUN pip install \\/,/^$/c'"$requirements"'\n' ./containers/Dockerfile
 
 # stop and remove container
-sudo docker stop boringmanclan
-sudo docker rm boringmanclan
+docker stop boringmanclan
+docker rm boringmanclan
 
 # build image
-sudo docker build -t boringmanclan ./containers
+docker build -t boringmanclan ./containers
 
 # run container
-sudo docker run -it --rm \
+docker run -it --rm \
 	-v $PWD:/application \
 	--name boringmanclan \
 	-h boringmanclan \
