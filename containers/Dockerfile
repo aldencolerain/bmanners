@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
 	build-essential \
 	python-dev \
 	python-pip
+ENV PYTHONDONTWRITEBYTECODE 1
 
 # install requirements
 RUN pip install \
