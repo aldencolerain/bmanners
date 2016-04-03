@@ -6,10 +6,11 @@ from views import auth
 from views import logs
 from views import profiles
 from views import reservations
+from views import tournaments
 
 
 urlpatterns = [
-	
+
 	# home
 	url(r'^$', home.index, name='home.index'),
 
@@ -18,6 +19,9 @@ urlpatterns = [
 	url(r'^signout$', auth.signout, name='auth.signout'),
 	url(r'^reset$', auth.reset, name='auth.reset'),
 	url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})$', auth.reset_confirm, name='password_reset_confirm'),
+
+	# tournament
+	rest_url(r'^tournament$', 'GET', tournaments.show, name='tournaments.show'),
 
 	# profiles
 	rest_url(r'^signup$', 'GET', profiles.new, name='profiles.new'),
@@ -29,7 +33,7 @@ urlpatterns = [
 	rest_url(r'^reservation$', 'GET', reservations.manage, name="reservations.manage"),
 	rest_url(r'^reservation$', 'POST', reservations.create, name='reservations.create'),
 	rest_url(r'^reservation$', 'DELETE', reservations.delete, name='reservations.delete'),
-	
+
 	# logs
 	rest_url(r'^logs$', 'GET', logs.index, name='logs.index'),
 
