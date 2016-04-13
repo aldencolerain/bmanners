@@ -1,5 +1,6 @@
 import random
 import string
+import json
 from django.db import models
 import django.utils.timezone as tz
 from datetime import datetime, timedelta
@@ -31,7 +32,41 @@ class Reservation(models.Model):
 	expiration = models.DateTimeField(default=a_time_in_the_future)
 	password = models.CharField(max_length=100, default=random_password)
 	map = models.CharField(max_length=100)
-	
+
 	@staticmethod
 	def current():
 	 	return Reservation.objects.filter(expiration__gt=tz.now()).last()
+
+class Tournament(models.Model):
+	data = models.TextField()
+
+	@classmethod
+	def create(cls):
+		tournament = cls()
+		tournament.matches = []
+		for i in range(31):
+			tournament.matches.append({'number': i, 'top_player': None, 'bottom_player': None,
+									   'top_score':None, 'bottom_score': None})
+		return tournament
+
+	@classmethod
+	def from_db(cls, db, field_names, values):
+		instance = super(Tournament, cls).from_db(db, field_names, values)
+		instance.matches = json.loads(instance.data)
+		return instance
+
+	def refresh_from_db(self, using=None, fields=None, **kwargs):
+		super(Tournament, self).refresh_from_db(using, fields, **kwargs)
+		self.matches = json.loads(self.data)
+
+	def save(self, *args, **kwargs):
+		self.id = 1
+		self.data = json.dumps(self.matches)
+		super(Tournament, self).save(*args, **kwargs)
+
+	@classmethod
+	def get(cls):
+		tournament = cls.objects.first()
+		if not tournament:
+			tournament = cls.create()
+		return tournament

@@ -9,6 +9,16 @@
 	<link href='http://fonts.googleapis.com/css?family=Kaushan+Script|Herr+Von+Muellerhoff' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Istok+Web|Roboto+Condensed:700' rel='stylesheet' type='text/css'>
+	<style>
+		#bracket * {
+			-webkit-box-sizing: content-box;
+			-moz-box-sizing: content-box;
+			box-sizing: content-box;
+		}
+		.match-form {
+			padding: 20px;
+		}
+	</style>
 {% endblock %}
 
 {% block content %}
@@ -27,95 +37,81 @@
 	<div class="split split-one">
 		<div class="round round-one current">
 			<div class="round-details">Round 1<br/><span class="date">Week 1</span></div>
-			<ul class="matchup">
-				<li class="team team-top">Boring Man(1231)<span class="score">76</span></li>
-				<li class="team team-bottom">Boring Man(9921)<span class="score">82</span></li>
+			{% for match in tournament.matches|slice:":8"  %}
+			<ul class="matchup {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">{{match.top_player|default:''}}<span class="score">{{match.top_score|default:''}}</span></li>
+				<li class="team team-bottom">{{match.bottom_player|default:''}}<span class="score">{{match.bottom_score|default:''}}</span></li>
 			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">64</span></li>
-				<li class="team team-bottom"><span class="score">56</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">68</span></li>
-				<li class="team team-bottom"><span class="score">54</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">74</span></li>
-				<li class="team team-bottom"><span class="score">92</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">78</span></li>
-				<li class="team team-bottom"><span class="score">80</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">64</span></li>
-				<li class="team team-bottom"><span class="score">63</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">70</span></li>
-				<li class="team team-bottom"><span class="score">59</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">64</span></li>
-				<li class="team team-bottom"><span class="score">68</span></li>
-			</ul>
+			{% endfor %}
 		</div>	<!-- END ROUND ONE -->
 
 		<div class="round round-two">
 			<div class="round-details">Round 2<br/><span class="date">Week 2</span></div>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+			{% for match in tournament.matches|slice:"8:12"  %}
+			<ul class="matchup {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">{{match.top_player|default:''}}<span class="score">{{match.top_score|default:''}}</span></li>
+				<li class="team team-bottom">{{match.bottom_player|default:''}}<span class="score">{{match.bottom_score|default:''}}</span></li>
 			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
+			{% endfor %}
 		</div>	<!-- END ROUND TWO -->
 
 		<div class="round round-three">
 			<div class="round-details">Round 3<br/><span class="date">Week 3</span></div>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+			{% for match in tournament.matches|slice:"12:14"  %}
+			<ul class="matchup {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">{{match.top_player|default:''}}<span class="score">{{match.top_score|default:''}}</span></li>
+				<li class="team team-bottom">{{match.bottom_player|default:''}}<span class="score">{{match.bottom_score|default:''}}</span></li>
 			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
+			{% endfor %}
 		</div>	<!-- END ROUND THREE -->
 	</div>
 
 <div class="champion">
 		<div class="semis-l">
 			<div class="round-details">Semifinals <br/><span class="date">TBA</span></div>
-			<ul class ="matchup championship">
-				<li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+			{% with tournament.matches.14 as match %}
+			<ul class ="matchup championship {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">
+					{{match.top_player|default:''}}<span class="vote-count">{{match.top_score|default:''}}</span>
+				</li>
+				<li class="team team-bottom">
+					{{match.bottom_player|default:''}}<span class="vote-count">{{match.bottom_score|default:''}}</span>
+				</li>
 			</ul>
+			{% endwith %}
 		</div>
 		<div class="final">
 			<i class="fa fa-trophy"></i>
 			<div class="round-details">Championship <br/><span class="date">TBA</span></div>
-			<ul class ="matchup championship">
-				<li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+			{% with tournament.matches.15 as match %}
+			<ul class ="matchup championship {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">
+					{{match.top_player|default:''}}<span class="vote-count">{{match.top_score|default:''}}</span>
+				</li>
+				<li class="team team-bottom">
+					{{match.bottom_player|default:''}}<span class="vote-count">{{match.bottom_score|default:''}}</span>
+				</li>
 			</ul>
+			{% endwith %}
 		</div>
 		<div class="semis-r">
 			<div class="round-details">Semifinals <br/><span class="date">TBA</span></div>
-			<ul class ="matchup championship">
-				<li class="team team-top">&nbsp;<span class="vote-count">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="vote-count">&nbsp;</span></li>
+			{% with tournament.matches.16 as match %}
+			<ul class ="matchup championship {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">
+					{{match.top_player|default:''}}<span class="vote-count">{{match.top_score|default:''}}</span>
+				</li>
+				<li class="team team-bottom">
+					{{match.bottom_player|default:''}}<span class="vote-count">{{match.bottom_score|default:''}}</span>
+				</li>
 			</ul>
+			{% endwith %}
 		</div>
 	</div>
 
@@ -125,78 +121,72 @@
 
 		<div class="round round-three">
 			<div class="round-details">Round 3<br/><span class="date">Week 3</span></div>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+			{% for match in tournament.matches|slice:"17:19"  %}
+			<ul class="matchup {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">{{match.top_player|default:''}}<span class="score">{{match.top_score|default:''}}</span></li>
+				<li class="team team-bottom">{{match.bottom_player|default:''}}<span class="score">{{match.bottom_score|default:''}}</span></li>
 			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
+			{% endfor %}
 		</div>	<!-- END ROUND THREE -->
 
 		<div class="round round-two">
 			<div class="round-details">Round 2<br/><span class="date">Week 2</span></div>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
+			{% for match in tournament.matches|slice:"19:23"  %}
+			<ul class="matchup {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">{{match.top_player|default:''}}<span class="score">{{match.top_score|default:''}}</span></li>
+				<li class="team team-bottom">{{match.bottom_player|default:''}}<span class="score">{{match.bottom_score|default:''}}</span></li>
 			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top">&nbsp;<span class="score">&nbsp;</span></li>
-				<li class="team team-bottom">&nbsp;<span class="score">&nbsp;</span></li>
-			</ul>
+			{% endfor %}
 		</div>	<!-- END ROUND TWO -->
  		<div class="round round-one current">
 			<div class="round-details">Round 1<br/><span class="date">Week 1</span></div>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">62</span></li>
-				<li class="team team-bottom"><span class="score">54</span></li>
+			{% for match in tournament.matches|slice:"23:31"  %}
+			<ul class="matchup {% if not match.top_score or not match.bottom_score %}highlight{% endif %}" 
+				id="match-{{match.number}}" data-toggle="modal" data-target=".match-modal-{{match.number}}">
+				<li class="team team-top">{{match.top_player|default:''}}<span class="score">{{match.top_score|default:''}}</span></li>
+				<li class="team team-bottom">{{match.bottom_player|default:''}}<span class="score">{{match.bottom_score|default:''}}</span></li>
 			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">68</span></li>
-				<li class="team team-bottom"><span class="score">66</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">64</span></li>
-				<li class="team team-bottom"><span class="score">56</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">36</span></li>
-				<li class="team team-bottom"><span class="score">40</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">38</span></li>
-				<li class="team team-bottom"><span class="score">44</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">52</span></li>
-				<li class="team team-bottom"><span class="score">80</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">58</span></li>
-				<li class="team team-bottom"><span class="score">59</span></li>
-			</ul>
-			<ul class="matchup">
-				<li class="team team-top"><span class="score">74</span></li>
-				<li class="team team-bottom"><span class="score">111</span></li>
-			</ul>
+			{% endfor %}
 		</div>	<!-- END ROUND ONE -->
 	</div>
 	</div>
 	</section>
 	<section class="share">
 			<div class="share-wrap">
-				<a class="share-icon" href="https://twitter.com/basement47"><i class="fa fa-twitter"></i></a>
-				<a class="share-icon" href="#"><i class="fa fa-facebook"></i></a>
-				<a class="share-icon" href="#"><i class="fa fa-envelope"></i></a>
+				<a class="share-icon" href="https://steamcommunity.com/app/346120/discussions/0/405693392917564554/"><i class="fa fa-steam"></i></a>
+				<a class="share-icon" href="http://spasmangames.com/boringman/"><i class="fa fa-gamepad"></i></a>
 			</div>
 	</section>
+
+	{% for match in tournament.matches %}	
+	<div class="modal fade match-modal-{{match.number}}" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<form action="" method="post" class="match-form">
+				{% csrf_token %}
+				<input type="hidden" name="number" value="{{match.number}}"></input>
+				<div class="form-group">
+					<label>Top Player</label>
+					<input type="text" class="form-control" name="top_player" value="{{match.top_player|default:''}}">
+				</div>
+				<div class="form-group">
+					<label>Bottom Player</label>
+					<input type="text" class="form-control" name="bottom_player" value="{{match.bottom_player|default:''}}">
+				</div>
+				<div class="form-group">
+					<label>Top Score</label>
+					<input type="text" class="form-control" name="top_score" value="{{match.top_score|default:''}}">
+				</div>
+				<div class="form-group">
+					<label>Bottom Score</label>
+					<input type="text" class="form-control" name="bottom_score" value="{{match.bottom_score|default:''}}">
+				</div>
+				<button type="submit" class="btn btn-default">Save</button>
+			</form>
+		</div>
+	</div>
+	</div>
+	{% endfor %}
 {% endblock %}

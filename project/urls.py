@@ -22,6 +22,7 @@ urlpatterns = [
 
 	# tournament
 	rest_url(r'^tournament$', 'GET', tournaments.show, name='tournaments.show'),
+	rest_url(r'^tournament$', 'POST', tournaments.edit, name='tournaments.edit'),
 
 	# profiles
 	rest_url(r'^signup$', 'GET', profiles.new, name='profiles.new'),
