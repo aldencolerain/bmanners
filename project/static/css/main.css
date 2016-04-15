@@ -1,0 +1,41 @@
+@import url('http://fonts.googleapis.com/css?family=Lora');
+body {
+	font-family: "Lora";
+	font-size: 20px;
+}
+div {
+	border: solid;
+	border-color: rgb(127, 127, 127);
+	border-radius: 15px;
+	box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+}
+h1 {
+	text-align: center;
+}
+h2 {
+	text-align: center;
+}
+#content {
+	width: 1000px;
+	padding-left: 10px;
+	margin: 0 auto;
+}
+#links {
+	background-color: #397DEE;
+	width: 500px;
+	margin: 0 auto;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	height: 75px;
+}
+#linkwrap {
+	text-align: center;
+	border: none;
+	border-color: transparent;
+	box-shadow: none;
+}
+#linkwrap > a{
+	text-decoration: none;
+	color: white;
+	font-size: 50px;
+}
