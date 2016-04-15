@@ -1,9 +1,8 @@
-body {
+#content {
     font-family: 'Istok Web', sans-serif;
     background: url("http://images.akamai.steamusercontent.com/ugc/528383129355499109/4FFC06AB36AB2FE8143803DD32F8B5F012024BDD/") no-repeat #000;
     background-size: cover;
     min-height: 100%;
-    margin: 0;
 }
 .hero {
     position: relative;

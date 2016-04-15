@@ -1,24 +1,27 @@
 @import url('http://fonts.googleapis.com/css?family=Lora');
 body {
 	font-family: "Lora";
-	font-size: 20px;
+	font-size: 18px;
+	background: white;
 }
-div {
+#navigation {
+	text-align: center;
+	padding: 10px;
+	background: white;
+}
+#content {
 	border: solid;
 	border-color: rgb(127, 127, 127);
 	border-radius: 15px;
 	box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+	padding: 15px;
+	margin: 5px;
 }
-h1 {
+#content h1 {
 	text-align: center;
 }
-h2 {
+#content h2 {
 	text-align: center;
-}
-#content {
-	width: 1000px;
-	padding-left: 10px;
-	margin: 0 auto;
 }
 #links {
 	background-color: #397DEE;
