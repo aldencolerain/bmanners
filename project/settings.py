@@ -61,6 +61,13 @@ MIDDLEWARE_CLASSES = (
 	'project.extensions.rest.RestMiddleware',
 )
 
+# Caching
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cache',
+    }
+}
 
 # URLs
 ROOT_URLCONF = 'project.urls'

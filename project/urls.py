@@ -7,6 +7,7 @@ from views import logs
 from views import profiles
 from views import reservations
 from views import tournaments
+from views import servers
 
 
 urlpatterns = [
@@ -34,6 +35,9 @@ urlpatterns = [
 	rest_url(r'^reservation$', 'GET', reservations.manage, name="reservations.manage"),
 	rest_url(r'^reservation$', 'POST', reservations.create, name='reservations.create'),
 	rest_url(r'^reservation$', 'DELETE', reservations.delete, name='reservations.delete'),
+
+	# servers
+	rest_url(r'^servers$', 'GET', servers.index, name="servers.index"),
 
 	# logs
 	rest_url(r'^logs$', 'GET', logs.index, name='logs.index'),

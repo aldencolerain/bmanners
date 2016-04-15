@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load humanize %}
+
+{% block content %}
+<table class="table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Locked</th>
+			<th>Map</th>
+			<th>Game Type</th>
+			<th>Players</th>
+			<th>Max Players</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for server in servers %}
+		<tr>
+			<td>{{server.name}}</td>
+			<td>{% if server.locked == 'True'%}Locked{% endif %}</td>
+			<td>{{server.map}}</td>
+			<td>{{server.type}}</td>
+			<td>{{server.players}}</td>
+			<td>{{server.max}}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
