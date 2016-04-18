@@ -45,6 +45,7 @@ urlpatterns = [
 	# api
 	rest_url(r'^api/reservation$', 'POST', reservations.api_show, name='reservations.api_show'),
 	rest_url(r'^api/logs$', 'POST', logs.api_create, name='logs.api_create'),
+	rest_url(r'^api/servers/(?P<name>.+)$', 'GET', servers.api_show, name="servers.api_show"),
 
 	# admin
 	url(r'^admin/', include(admin.site.urls)),
